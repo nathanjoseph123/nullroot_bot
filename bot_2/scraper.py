@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.service import Service
-import sys
+import sys,os
 class scraper:
     def __init__(self,url:str):
 
@@ -23,6 +23,7 @@ class scraper:
         options.set_preference("browser.download.manager.showWhenStarting", False)
         service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
         self.site = webdriver.Firefox(options=options, service=service)
+        os.environ["MOZ_DISABLE_CONTENT_SANDBOX"] = "1"
         self.url=url
         self.sucessful=False
         self.message={}
