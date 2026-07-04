@@ -19,7 +19,7 @@ class bot:
         self.privious=0
         self.top_message={}
         self.headers={"Authorization":headers}
-#MTUyMjk4NTkwNjY2NjA3ODI2Mw.GpV5hx.DdtB5EZ3rezg6az8bM9kSz-o1F3i5imIpv0dtk
+
 
     def command(self):
         while self.ben:
@@ -84,10 +84,8 @@ class bot:
 
     def send_message(self):
         try:
-            requests.post(self.server_id,headers=self.headers,data={"content" : f"@everyone {self.mess_to_send}\nUser wallet : {self.address.get(0)}\nNUMBER: {len(self.address)}","mention_everyone": True})
+            requests.post(self.server_id,headers=self.headers,data={"content" : f"@everyone\n{self.mess_to_send}\nUser wallet : {self.address.get(0)}\nNUMBER: {len(self.address)}","mention_everyone": True})
         except Exception as e:
             print("can't take this shit  ",e)
 
 
-#https://discord.com/api/v9/channels/1522987715577253920/messages
-#
