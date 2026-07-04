@@ -1,15 +1,4 @@
-"""
-Minter Control Panel — Frontend Only
---------------------------------------
-Pure UI. No scraping logic lives here — you wire your own backend in at the
-three marked points below. Everything the page collects (inputs, button
-state) is exposed through plain Python variables/session_state so your
-backend can just read/write it directly.
 
-Run:
-    pip install streamlit --break-system-packages
-    streamlit run app.py
-"""
 
 import streamlit as st
 import time
@@ -164,9 +153,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ==========================================================================
-# INPUTS
-# ==========================================================================
+
 col1, col2 = st.columns(2)
 with col1:
     server_input = st.text_input(
