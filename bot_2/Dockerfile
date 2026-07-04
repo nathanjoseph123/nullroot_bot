@@ -18,7 +18,7 @@ RUN wget -q https://github.com/mozilla/geckodriver/releases/download/v0.34.0/gec
     && rm geckodriver-v0.34.0-linux64.tar.gz \
     && chmod +x /usr/local/bin/geckodriver \
     && ln -sf /usr/bin/firefox-esr /usr/local/bin/firefox
-
+RUN mkdir -p /app/downloads
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
