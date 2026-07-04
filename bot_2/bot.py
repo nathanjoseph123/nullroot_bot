@@ -1,5 +1,4 @@
 import time
-from tkinter import Message
 import requests,os
 from scraper import scraper
 
