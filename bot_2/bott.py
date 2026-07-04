@@ -11,7 +11,6 @@ Run:
     streamlit run app.py
 """
 
-from customtkinter import NONE
 import streamlit as st
 import time
 from datetime import datetime
@@ -20,22 +19,9 @@ from streamlit.runtime.state import session_state
 from bot import bot
 import threading
 from streamlit_local_storage import LocalStorage
-# ==========================================================================
-# ============ >>> BACKEND INTEGRATION POINTS <<< =========================
-# ==========================================================================
-#
-# 1) ON START — called once when the Start button is pressed.
-#       Receives: mode ("top" | "recent"), server_input (str), auth_input (str)
-#
-#       from your_backend import start_scraper
-#       def on_start(mode, server_input, auth_input):
-#           start_scraper(mode=mode, webhook=server_input, token=auth_input)
-#import streamlit as st
-
 
 localS = LocalStorage()
 
-# read saved values before rendering inputs
 saved_server = localS.getItem("server_input") or ""
 saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
@@ -48,44 +34,14 @@ def on_start(mode: str, server_input: str, auth_input: str):
     st.session_state.bot_.scrap.scrap()
     threading.Thread(target=st.session_state.bot_.command).start()
     push_log(f"[stub] on_start called — mode={mode}")
-    # TODO: call your backend's start function here
-
-
-# 2) ON STOP — called once when the Stop button is pressed.
-#
-#       from your_backend import stop_scraper
-#       def on_stop():
-#           stop_scraper()
-#
+d
 def on_stop():
     push_log("[stub] on_stop called")
     st.session_state.bot_.mints=4
-    # TODO: call your backend's stop function here
 
-
-# 3) GETTING DATA *OUT* OF THE PAGE — two ways, pick whichever fits your setup:
-#
-#    a) PULL (simplest): your backend just reads session_state directly,
-#       since Streamlit shares one process/session:
-#           st.session_state.server_input
-#           st.session_state.auth_input
-#           st.session_state.mode
-#
-#    b) PUSH (for live updates from backend -> page): call these from your
-#       backend code while it's running, to stream logs / files into the UI:
-#           push_log("your message here")
-#           push_download("filename.csv", b"raw file bytes")
-#
 def push_log(msg: str):
     st.session_state.logs.append(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
-    st.session_state.logs = st.session_state.logs[-200:]
-
-
-
-
-# ==========================================================================
-# PAGE CONFIG + STYLE
-# ==========================================================================
+    st.session_state.logs = st.se
 st.set_page_config(page_title="NULLROOT BOT", page_icon="🛰️", layout="centered")
 
 st.markdown(
@@ -189,9 +145,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ==========================================================================
-# SESSION STATE
-# ==========================================================================
 for key, val in {
     "running": False,
     "mode": "recent",
@@ -201,9 +154,6 @@ for key, val in {
     if key not in st.session_state:
         st.session_state[key] = val
 
-# ==========================================================================
-# HERO
-# ==========================================================================
 st.markdown(
     """
     <div class="hero">
@@ -286,9 +236,6 @@ with c2:
         on_stop()
         st.rerun()
 
-# ==========================================================================
-# LOGS
-# ===============ikkkkkkkkj===========================================================
 st.write("")
 st.subheader("Logs")
 st.markdown(
@@ -296,13 +243,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ==========================================================================
-# DOWNLOADS
-# ==========================================================================
 
-# ==========================================================================
-# ABOUT DEV — fill in your own info
-# ==========================================================================
 st.write("")
 st.write("")
 with st.expander("👤 About the Dev", expanded=False):
