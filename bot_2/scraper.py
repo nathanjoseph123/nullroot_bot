@@ -11,6 +11,11 @@ import sys,os
 class scraper:
     def __init__(self,url:str):
 
+        os.environ["MOZ_DISABLE_CONTENT_SANDBOX"] = "1"
+        os.environ["MOZ_DISABLE_GMP_SANDBOX"] = "1"
+        os.environ["MOZ_DISABLE_RDD_SANDBOX"] = "1"
+        os.environ["MOZ_DISABLE_GPU_SANDBOX"] = "1"
+        
         options = Options()
         self.download_dir = "/app/downloads/"
         options.add_argument("--headless")
@@ -21,9 +26,9 @@ class scraper:
         options.set_preference("browser.download.dir", self.download_dir)
         options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
         options.set_preference("browser.download.manager.showWhenStarting", False)
+        options.set_preference("security.sandbox.content.level", 0)
         service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
         self.site = webdriver.Firefox(options=options, service=service)
-        os.environ["MOZ_DISABLE_CONTENT_SANDBOX"] = "1"
         self.url=url
         self.sucessful=False
         self.message={}
