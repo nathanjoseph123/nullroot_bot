@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     dbus-x11 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget -q https://github.com/mozilla/geckodriver/releases/download/v0.34.0/geckodriver-v0.34.0-linux64.tar.gz \
-    && tar -xzf geckodriver-v0.34.0-linux64.tar.gz -C /usr/local/bin \
-    && rm geckodriver-v0.34.0-linux64.tar.gz \
+RUN wget -q https://github.com/mozilla/geckodriver/releases/download/v0.37.0/geckodriver-v0.37.0-linux64.tar.gz \
+    && tar -xzf geckodriver-v0.37.0-linux64.tar.gz -C /usr/local/bin \
+    && rm geckodriver-v0.37.0-linux64.tar.gz \
     && chmod +x /usr/local/bin/geckodriver \
     && ln -sf /usr/bin/firefox-esr /usr/local/bin/firefox
 RUN mkdir -p /app/downloads
