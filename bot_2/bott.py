@@ -23,7 +23,7 @@ def on_start(mode: str, server_input: str, auth_input: str):
     st.session_state.bot_.scrap.scrap()
     threading.Thread(target=st.session_state.bot_.command).start()
     push_log(f"[stub] on_start called — mode={mode}")
-d
+
 def on_stop():
     push_log("[stub] on_stop called")
     st.session_state.bot_.mints=4
