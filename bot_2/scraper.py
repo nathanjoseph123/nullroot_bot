@@ -9,8 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 class scraper:
     def __init__(self,url:str):
         options = Options()
-        self.download_dir="/home/nullroot/Downloads/"
-        #self.download_dir="/app/downloads"
+        #self.download_dir="/home/nullroot/Downloads/"
+        self.download_dir="/app/downloads/"
         options.add_argument("--headless")
         options.set_preference("browser.download.folderList", 2)
         options.set_preference("browser.download.dir", self.download_dir)
