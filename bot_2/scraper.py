@@ -9,7 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 class scraper:
     def __init__(self,url:str):
         options = Options()
-        #self.download_dir="/home/nullroot/Downloads/"
         self.download_dir="/app/downloads/"
         options.add_argument("--headless")
         options.set_preference("browser.download.folderList", 2)
@@ -21,7 +20,6 @@ class scraper:
         self.sucessful=False
         self.site =webdriver.Firefox(options=options)
         self.message={}
-        #self.scrap()
     def scrap(self):
         try:
             self.site.quit_on_exit=False
