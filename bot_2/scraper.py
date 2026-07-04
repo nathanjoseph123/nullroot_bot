@@ -6,21 +6,25 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.firefox.service import Service
+import sys
 class scraper:
     def __init__(self,url:str):
+
         options = Options()
-        self.download_dir="/app/downloads/"
+        self.download_dir = "/app/downloads/"
         options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.binary_location = "/usr/bin/firefox-esr"
         options.set_preference("browser.download.folderList", 2)
         options.set_preference("browser.download.dir", self.download_dir)
         options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
         options.set_preference("browser.download.manager.showWhenStarting", False)
-        options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
+        service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
+        self.site = webdriver.Firefox(options=options, service=service)
         self.url=url
         self.sucessful=False
-        self.site =webdriver.Firefox(options=options)
         self.message={}
     def scrap(self):
         try:
