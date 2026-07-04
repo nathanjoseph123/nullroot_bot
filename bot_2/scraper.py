@@ -15,7 +15,9 @@ class scraper:
         options.set_preference("browser.download.dir", self.download_dir)
         options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
         options.set_preference("browser.download.manager.showWhenStarting", False)
-       
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         self.url=url
         self.sucessful=False
         self.site =webdriver.Firefox(options=options)
