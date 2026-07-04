@@ -238,11 +238,11 @@ with st.expander("👤 About the Dev", expanded=False):
         """
         <div class="dev-card">
             <div class="dev-avatar">N</div>
-            <div class="dev-name">Nathan joseph (nullroot)((</div>
+            <div class="dev-name">Nathan joseph (nullroot)</div>
             <div class="dev-tag">builder · systems &amp; graphics</div>
             <div style="clear:both;"></div>
             <div style="margin-top:10px; color:#c8c8dd; font-size:0.88rem;">
-                This project was made by nathan in a fucking day ,\nso might not be perfect , but come on " i am null root"
+                This project was made by nathan in a fucking day ,\nso might not be perfect , but come on " i am nullroot"
             </div>
             <div class="dev-links">
                 <a href="https://github.com/nathanjoseph123" target="_blank">GitHub</a> 
