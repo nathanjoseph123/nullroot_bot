@@ -31,20 +31,21 @@ class bot:
                     
                     try:
                         self.prev=len(self.messages)
-                        with open(self.path,'r') as files:
-                            lines=files.readlines()
-                            self.messages=[lines[i] for i in range(1,len(lines))]
-                            self.address.clear()
-                            print("messages : ",self.messages)
                         if os.path.exists(self.path):
-                            os.remove(self.path)
-                        for i in range(len(self.messages)):
-                            some_shit=self.messages[i].split(',')
-                            new_string=some_shit[self.split].rstrip("'")
-                            self.address.update({i:new_string})
-                        if self.prev <len(self.messages):
-                            self.send_message()
-                            print("message sent 0")            
+                            with open(self.path,'r') as files:
+                                lines=files.readlines()
+                                self.messages=[lines[i] for i in range(1,len(lines))]
+                                self.address.clear()
+                                print("messages : ",self.messages)
+                         
+                                os.remove(self.path)
+                            for i in range(len(self.messages)):
+                                some_shit=self.messages[i].split(',')
+                                new_string=some_shit[self.split].rstrip("'")
+                                self.address.update({i:new_string})
+                            if self.prev <len(self.messages):
+                                self.send_message()
+                                print("message sent 0")            
 
                     except Exception as e:
                         try:
@@ -59,20 +60,21 @@ class bot:
                     self.path=os.path.join(self.scrap.download_dir,"top-minters.csv")
                     try:
                         self.privious=len(self.top_message)
-                        with open(self.path,'r') as files:
-                            lines=files.readlines()
-                            self.top_message=[lines[i] for i in range(1,len(lines))]
-                            self.address.clear()
                         if os.path.exists(self.path):
-                            os.remove(self.path)
-                        for i in range(len(self.top_message)):
-                            some_shit=self.top_message[i].split(',')
-                            new_string=some_shit[self.split].rstrip("'")
-                            self.address.update({i:new_string})
-                        if self.privious <len(self.top_message):
-                            self.mess_to_send="latest top miner :"
-                            self.send_message()
-                            print("SENT BLYAT")
+                            with open(self.path,'r') as files:
+                                lines=files.readlines()
+                                self.top_message=[lines[i] for i in range(1,len(lines))]
+                                self.address.clear()
+                            
+                                os.remove(self.path)
+                            for i in range(len(self.top_message)):
+                                some_shit=self.top_message[i].split(',')
+                                new_string=some_shit[self.split].rstrip("'")
+                                self.address.update({i:new_string})
+                            if self.privious <len(self.top_message):
+                                self.mess_to_send="latest top miner :"
+                                self.send_message()
+                                print("SENT BLYAT")
                     except Exception as e:
                         try:
                             print("ERROR READING FILE ",e)
