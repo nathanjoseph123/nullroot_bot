@@ -63,7 +63,7 @@ class scraper:
     
             time.sleep(3)
         except Exception as e:
-            print("minner : " ,e)
+            print("minner 1 : " ,e)
 
     def get_top_minters(self):
         try:
@@ -78,7 +78,7 @@ class scraper:
     
             time.sleep(3)
         except Exception as e:
-            print("minner : " ,e)
+            print("minner 2 : " ,e)
 
 
 
