@@ -16,21 +16,24 @@ saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
 if "bot_" not in st.session_state:
     st.session_state.bot_ = None
+st.session_state.running=False
 def on_start(mode: str, server_input: str, auth_input: str):
-    global bot_
-    st.session_state.bot_= bot(server_input,auth_input)
-    
-    st.session_state.bot_.scrap.scrap()
-    threading.Thread(target=st.session_state.bot_.command).start()
-    push_log(f"[stub] on_start called — mode={mode}")
+    if not st.session_state.running:
+        st.session_state.running=True
+        st.session_state.bot_= bot(server_input,auth_input)
+        st.session_state.bot_.scrap.scrap()
+        threading.Thread(target=st.session_state.bot_.command).start()
+        push_log(f"[stub] on_start called — mode={mode}")
 
 def on_stop():
     push_log("[stub] on_stop called")
-    st.session_state.bot_.mints=4
+    if st.session_state.running:
+        st.session_state.running=False
+        st.session_state.bot_.mints=4
+        st.session_state.bot_=None
 
 def push_log(msg: str):
     st.session_state.logs.append(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
-    st.session_state.logs = st.se
 st.set_page_config(page_title="NULLROOT BOT", page_icon="🛰️", layout="centered")
 
 st.markdown(
