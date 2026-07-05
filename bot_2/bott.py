@@ -203,9 +203,10 @@ with m1:
     if st.button("🏆 Top Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "top" else "secondary"):
         st.session_state.mode = "top"
+        st.session_state._bot_instance["bot"].mints=0
         if st.session_state._bot_instance["bot"]:
             st.session_state._bot_instance["bot"].running=True
-            st.session_state._bot_instance["bot"].mints=1
+            
             st.session_state._bot_instance["mode"]="top"
         else:
           print("no omom2")
@@ -213,9 +214,10 @@ with m2:
     if st.button("🆕 Recent Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
         st.session_state.mode = "recent"
+        st.session_state._bot_instance["bot"].mints=0
         if st.session_state._bot_instance["bot"]:
             st.session_state._bot_instance["bot"].running=True
-            st.session_state._bot_instance["bot"].mints=0
+
             st.session_state._bot_instance["mode"]="recent"
         else:
             print("no omom3")
