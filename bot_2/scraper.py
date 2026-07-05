@@ -17,35 +17,21 @@ class scraper:
         os.environ["MOZ_DISABLE_GPU_SANDBOX"] = "1"
         
         options = Options()
-        self.download_dir = "/app/downloads/"
-        options.add_argument("--headless")
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        options.binary_location = "/usr/bin/firefox-esr"
-        options.set_preference("browser.download.folderList", 2)
-        options.set_preference("browser.download.dir", self.download_dir)
-        options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
-        options.set_preference("browser.download.manager.showWhenStarting", False)
-        options.set_preference("security.sandbox.content.level", 0)
+        options.add_argument("--disable-gpu")
+        options.binary_location = "/usr/bin/google-chrome"
         
-        options.set_preference("app.normandy.enabled", False)
-        options.set_preference("services.settings.server", "")
-        options.set_preference("datareporting.policy.dataSubmissionEnabled", False)
-        options.set_preference("toolkit.telemetry.enabled", False)
-        options.set_preference("browser.newtabpage.activity-stream.feeds.telemetry", False)
-        options.set_preference("network.captive-portal-service.enabled", False)
+        prefs = {
+            "download.default_directory": "/app/downloads",
+            "download.prompt_for_download": False,
+            "safebrowsing.enabled": True,
+        }
+        options.add_experimental_option("prefs", prefs)
+        
+        self.site = webdriver.Chrome(options=options)
 
-        
-        options.set_preference("browser.tabs.remote.autostart", False)
-        options.set_preference("dom.ipc.processCount", 1)
-        options.add_argument("--width=800")
-        options.add_argument("--height=600")
-
-        
-        service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
-        subprocess.run(["pkill", "-f", "firefox"], check=False)
-        subprocess.run(["pkill", "-f", "geckodriver"], check=False)
-        service = Service(log_output=sys.stdout, service_args=["--marionette-port", "0"])
-        self.site = webdriver.Firefox(options=options, service=service)
         self.url=url
         self.sucessful=False
         self.message={}
