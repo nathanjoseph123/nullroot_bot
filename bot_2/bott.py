@@ -28,7 +28,6 @@ def on_start(mode, server_input, auth_input):
             pass
     st.session_state._bot_instance["bot"] = bot(server_input, auth_input)
     st.session_state._bot_instance["running"] = True
-    st.session_state._bot_instance["bot"].running=True
     st.session_state._bot_instance["bot"].scrap.scrap()
     print("bot id : ",st.session_state._bot_instance["bot"])
     threading.Thread(target=st.session_state._bot_instance["bot"].command).start()
@@ -205,7 +204,7 @@ with m1:
                   type="primary" if st.session_state.mode == "top" else "secondary"):
         st.session_state.mode = "top"
         if st.session_state._bot_instance["bot"]:
-            print("instance one")
+            st.session_state._bot_instance["bot"].running=True
             st.session_state._bot_instance["bot"].mints=1
             st.session_state._bot_instance["mode"]="top"
         else:
@@ -215,7 +214,7 @@ with m2:
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
         st.session_state.mode = "recent"
         if st.session_state._bot_instance["bot"]:
-            print("instance two")
+            st.session_state._bot_instance["bot"].running=True
             st.session_state._bot_instance["bot"].mints=0
             st.session_state._bot_instance["mode"]="recent"
         else:
