@@ -17,7 +17,7 @@ saved_message = localS.getItem("message_input") or ""
 if "_bot_instance" not in st.session_state:
     st.session_state._bot_instance = {"bot": None, "running": False,"mode":"None"}
 
-def on_start(mode, server_input, auth_input):
+def on_start(server_input, auth_input):
     if st.session_state._bot_instance["running"]:
         push_log("Already running — ignoring duplicate start.")
         return
@@ -33,7 +33,7 @@ def on_start(mode, server_input, auth_input):
     st.session_state._bot_instance["bot"].scrap.scrap()
     print("bot id : ",st.session_state._bot_instance["bot"])
     threading.Thread(target=st.session_state._bot_instance["bot"].command).start()
-    push_log(f"[stub] on_start called — mode={mode}")
+    push_log(f"[stub] on_start called — mode={'None'}")
 
 def on_stop():
     if st.session_state._bot_instance["bot"] is not None:
@@ -244,7 +244,7 @@ with c1:
             st.warning("Add a Discord webhook URL or channel ID first.")
         else:
             st.session_state.running = True
-            on_start(st.session_state.mode, server_input, auth_input)
+            on_start(server_input, auth_input)
             st.rerun()
 with c2:
     if st.button("■ Stop", use_container_width=True, disabled=not st.session_state.running):
