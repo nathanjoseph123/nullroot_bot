@@ -14,9 +14,8 @@ localS = LocalStorage()
 saved_server = localS.getItem("server_input") or ""
 saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
-if "bot_" not in st.session_state:
 # near the top of the file, outside any function
-    _bot_instance = {"bot": None, "running": False}
+_bot_instance = {"bot": None, "running": False}
 
 def on_start(mode, server_input, auth_input):
     if _bot_instance["running"]:
