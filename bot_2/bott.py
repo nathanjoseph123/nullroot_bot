@@ -36,6 +36,7 @@ def on_start(mode, server_input, auth_input):
 def on_stop():
     if _bot_instance["bot"] is not None:
         try:
+            _bot_instance["bot"].running=False
             _bot_instance["bot"].scrap.site.quit()
         except Exception:
             pass
@@ -195,7 +196,8 @@ message_input = st.text_input(
 if  _bot_instance["bot"]:
     print("working oo")
     _bot_instance["bot"].mess_to_send=message_input
-    
+else:
+    print("no omom1")
 st.write("")
 st.subheader("Mode")
 m1, m2 = st.columns(2)
@@ -206,6 +208,8 @@ with m1:
             print("instance one")
             _bot_instance["bot"].mints=1
             st.session_state.mode = "top"
+        else:
+          print("no omom2")
 with m2:
     if st.button("🆕 Recent Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
@@ -214,6 +218,8 @@ with m2:
             _bot_instance["bot"].mints=0
     
             st.session_state.mode = "recent"
+        else:
+            print("no omom3")
        
 
 st.write("")
