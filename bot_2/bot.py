@@ -24,7 +24,7 @@ class bot:
     def command(self):
         while self.ben:
             if self.mints==0:
-                self.path= os.path.join(elf.scrap.download_dir,"recent-minters.csv")
+                self.path= os.path.join(self.scrap.download_dir,"recent-minters.csv")
                 self.scrap.get_recent_minters()
                 self.split=0
                 
@@ -45,7 +45,7 @@ class bot:
                 except Exception as e:
                     try:
                         print("ERROR READING FILE : ",e)
-                        os.remove(self.ath)
+                        os.remove(self.path)
                         self.scrap.site.quit()
                         self.ben=False
                     except Exception as e:
