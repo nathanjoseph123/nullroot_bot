@@ -31,7 +31,7 @@ def on_start(mode, server_input, auth_input):
     st.session_state._bot_instance["bot"].running=True
     st.session_state._bot_instance["bot"].scrap.scrap()
     print("bot id : ",st.session_state._bot_instance["bot"])
-    threading.Thread(target=_bot_instance["bot"].command).start()
+    threading.Thread(target=st.session_state._bot_instance["bot"].command).start()
     push_log(f"[stub] on_start called — mode={mode}")
 
 def on_stop():
