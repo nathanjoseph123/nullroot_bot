@@ -59,7 +59,6 @@ class bot:
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.top_message=[lines[i] for i in range(1,len(lines))]
-                    os.remove(self.path)
                     for i in range(len(self.top_message)):
                         some_shit=self.top_message[i].split(',')
                         new_string=some_shit[self.split].rstrip("'")
