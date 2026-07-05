@@ -82,10 +82,9 @@ class bot:
     
                 elif self.mints==4:
                     self.scrap.site.quit()
-                    exit()                           
-    
-            time.sleep(1.2)
-
+                    self.ben=False
+            print("self.mint  : ",self.mint)
+            time.sleep(1.0)
 
     def send_message(self):
         try:
