@@ -200,14 +200,14 @@ m1, m2 = st.columns(2)
 with m1:
     if st.button("🏆 Top Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "top" else "secondary"):
-        if st.session_state.bot_:
-            st.session_state.bot_.mints=1
+        if _bot_instance["bot"]:
+            _bot_instance["bot"].mints=1
             st.session_state.mode = "top"
 with m2:
     if st.button("🆕 Recent Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
-        if st.session_state.bot_:
-            st.session_state.bot_.mints=0
+        if _bot_instance["bot"]:
+            _bot_instance["bot"].mints=0
     
             st.session_state.mode = "recent"
        
