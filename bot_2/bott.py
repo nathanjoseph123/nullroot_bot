@@ -42,7 +42,7 @@ def on_stop():
             st.session_state._bot_instance["bot"].scrap.site.quit()
         except Exception:
             pass
-    st.session_state._bot_instance["bot"] = None
+    st.session_state._bot_instance["bot"].ben=False
     st.session_state._bot_instance["running"] = False
     push_log("Stopped.")
 
