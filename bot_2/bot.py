@@ -41,16 +41,15 @@ class bot:
                         self.address.update({i:new_string})
                     if self.prev <len(self.messages):
                         self.send_message()
-            
+                        print("message sent 0")            
 
                 except Exception as e:
                     try:
-                        print("ERROR READING FILE : ",e)
-                        os.remove(self.path)
-                        self.scrap.site.quit()
-                        self.ben=False
+                        print("ERROR READING FILE ",e)
+                        if os.path.exists(self.path):
+                          os.remove(self.path)
                     except Exception as e:
-                        self.ben=False
+                        pass
             elif self.mints==1:
                 self.split=1
                 self.scrap.get_top_minters()
@@ -73,14 +72,11 @@ class bot:
                         print("SENT BLYAT")
                 except Exception as e:
                     try:
-                        print("ERROR READING FILE : ",e)
+                        print("ERROR READING FILE ",e)
                         if os.path.exists(self.path):
-                            os.remove(self.path)
-                        
-                        self.scrap.site.quit()
-                        self.ben=False
+                          os.remove(self.path)
                     except Exception as e:
-                        self.ben=False
+                        pass
 
             elif self.mints==4:
                 self.scrap.site.quit()
