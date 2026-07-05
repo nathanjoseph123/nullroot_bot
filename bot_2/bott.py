@@ -17,9 +17,13 @@ saved_message = localS.getItem("message_input") or ""
 if "bot_" not in st.session_state:
     st.session_state.bot_ = None
 def on_start(mode: str, server_input: str, auth_input: str):
-    if  not st.session_state.bot_:
-        st.session_state.bot_= bot(server_input,auth_input)
-        st.session_state.bot_.running=True
+    if st.session_state.bot_ is not None:
+        try:
+            st.session_state.bot_.scrap.site.quit()
+        except Exception:
+            pass
+        st.session_state.bot_ = None
+        st.session_state.bot_ = bot(server_input, auth_input)
         st.session_state.bot_.scrap.scrap()
         threading.Thread(target=st.session_state.bot_.command).start()
         push_log(f"[stub] on_start called — mode={mode}")
