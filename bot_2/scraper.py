@@ -50,29 +50,35 @@ class scraper:
             pass
 
     def get_recent_minters(self):
-        self.most_recent=self.next.find_element(By.XPATH,"/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[2]")
-        time.sleep(1)
-        self.site.execute_script("arguments[0].click();", self.most_recent)
-    
-
-        self.next=self.most_recent.find_element(By.XPATH, "/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[2]/div[1]/button")
-        time.sleep(2)
+        try:
+            self.most_recent=self.next.find_element(By.XPATH,"/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[2]")
+            time.sleep(1)
+            self.site.execute_script("arguments[0].click();", self.most_recent)
         
-        self.site.execute_script("arguments[0].click();", self.next)
-
-        time.sleep(3)
+    
+            self.next=self.most_recent.find_element(By.XPATH, "/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[2]/div[1]/button")
+            time.sleep(2)
+            
+            self.site.execute_script("arguments[0].click();", self.next)
+    
+            time.sleep(3)
+        except Exception as e:
+            print("minner : " ,e)
 
     def get_top_minters(self):
-        self.most_recent=self.next.find_element(By.XPATH,"/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[1]")
-        time.sleep(1)
-        self.site.execute_script("arguments[0].click();", self.most_recent)
-
-        self.next=self.most_recent.find_element(By.XPATH, "/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[1]/div[1]/button")
-        time.sleep(2)
-        
-        self.site.execute_script("arguments[0].click();", self.next)
-
-        time.sleep(3)
+        try:
+            self.most_recent=self.next.find_element(By.XPATH,"/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[1]")
+            time.sleep(1)
+            self.site.execute_script("arguments[0].click();", self.most_recent)
+    
+            self.next=self.most_recent.find_element(By.XPATH, "/html/body/div/main/div/div[3]/div[3]/div[4]/div/div[1]/div[1]/button")
+            time.sleep(2)
+            
+            self.site.execute_script("arguments[0].click();", self.next)
+    
+            time.sleep(3)
+        except Exception as e:
+            print("minner : " ,e)
 
 
 
