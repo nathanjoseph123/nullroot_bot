@@ -34,8 +34,11 @@ class scraper:
         options.set_preference("browser.newtabpage.activity-stream.feeds.telemetry", False)
         options.set_preference("network.captive-portal-service.enabled", False)
 
-
-
+        
+        options.set_preference("browser.tabs.remote.autostart", False)
+        options.set_preference("dom.ipc.processCount", 1)
+        options.add_argument("--width=800")
+        options.add_argument("--height=600")
 
         
         service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
