@@ -191,8 +191,8 @@ message_input = st.text_input(
     value=saved_message,
     placeholder="Custom message to send along with the CSV",
 )
-if  st.session_state.bot_:
-    st.session_state.bot_.mess_to_send=message_input
+if  _bot_instance["bot"]:
+    _bot_instance["bot"].mess_to_send=message_input
     
 st.write("")
 st.subheader("Mode")
