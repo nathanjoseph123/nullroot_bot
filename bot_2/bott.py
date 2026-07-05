@@ -14,7 +14,7 @@ saved_server = localS.getItem("server_input") or ""
 saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
 # near the top of the file, outside any function
-_bot_instance = {"bot": None, "running": False}
+_bot_instance = {"bot": None, "running": False,"mode":"None"}
 
 def on_start(mode, server_input, auth_input):
     if _bot_instance["running"]:
@@ -183,7 +183,6 @@ with col2:
         "Discord Auth (Bot Token)",
         key="auth_input",
         value=saved_auth,
-        type="password",
         placeholder="leave blank if using a webhook URL",
     )
 
@@ -194,7 +193,6 @@ message_input = st.text_input(
     placeholder="Custom message to send along with the CSV",
 )
 if  _bot_instance["bot"]:
-    print("working oo")
     _bot_instance["bot"].mess_to_send=message_input
 else:
     print("no omom1")
@@ -208,6 +206,7 @@ with m1:
         if _bot_instance["bot"]:
             print("instance one")
             _bot_instance["bot"].mints=1
+            _bot_instance["mode"]="top"
         else:
           print("no omom2")
 with m2:
@@ -217,6 +216,7 @@ with m2:
         if _bot_instance["bot"]:
             print("instance two")
             _bot_instance["bot"].mints=0
+            _bot_instance["mode"]="recent"
         else:
             print("no omom3")
        
@@ -226,7 +226,7 @@ status_class = "status-running" if st.session_state.running else "status-idle"
 status_text = "RUNNING" if st.session_state.running else "IDLE"
 st.markdown(
     f'<span class="status-pill {status_class}">● {status_text}</span> '
-    f'&nbsp; mode: <b>"NONE"</b>',
+    f'&nbsp; mode: <b>_bot_instance["mode"]</b>',
     unsafe_allow_html=True,
 )
 
