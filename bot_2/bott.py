@@ -15,25 +15,33 @@ saved_server = localS.getItem("server_input") or ""
 saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
 if "bot_" not in st.session_state:
-    st.session_state.bot_ = None
-def on_start(mode: str, server_input: str, auth_input: str):
-    if st.session_state.bot_ is not None:
+# near the top of the file, outside any function
+    _bot_instance = {"bot": None, "running": False}
+
+def on_start(mode, server_input, auth_input):
+    if _bot_instance["running"]:
+        push_log("Already running — ignoring duplicate start.")
+        return
+    if _bot_instance["bot"] is not None:
         try:
-            st.session_state.bot_.scrap.site.quit()
+            _bot_instance["bot"].scrap.site.quit()
         except Exception:
             pass
-        st.session_state.bot_ = None
-        st.session_state.bot_ = bot(server_input, auth_input)
-        st.session_state.bot_.scrap.scrap()
-        threading.Thread(target=st.session_state.bot_.command).start()
-        push_log(f"[stub] on_start called — mode={mode}")
+    _bot_instance["bot"] = bot(server_input, auth_input)
+    _bot_instance["running"] = True
+    _bot_instance["bot"].scrap.scrap()
+    threading.Thread(target=_bot_instance["bot"].command).start()
+    push_log(f"[stub] on_start called — mode={mode}")
 
 def on_stop():
-    push_log("[stub] on_stop called")
-    if st.session_state.bot_.running:
-        st.session_state.bot_.running=False
-        st.session_state.bot_.mints=4
-        st.session_state.bot_=None
+    if _bot_instance["bot"] is not None:
+        try:
+            _bot_instance["bot"].scrap.site.quit()
+        except Exception:
+            pass
+    _bot_instance["bot"] = None
+    _bot_instance["running"] = False
+    push_log("Stopped.")
 
 def push_log(msg: str):
     st.session_state.logs.append(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
