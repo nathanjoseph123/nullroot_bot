@@ -16,10 +16,9 @@ saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
 if "bot_" not in st.session_state:
     st.session_state.bot_ = None
-st.session_state.running=False
 def on_start(mode: str, server_input: str, auth_input: str):
-    if not st.session_state.running:
-        st.session_state.running=True
+    if not st.session_state.bot_.running:
+        st.session_state.bot_.running=True
         st.session_state.bot_= bot(server_input,auth_input)
         st.session_state.bot_.scrap.scrap()
         threading.Thread(target=st.session_state.bot_.command).start()
@@ -27,8 +26,8 @@ def on_start(mode: str, server_input: str, auth_input: str):
 
 def on_stop():
     push_log("[stub] on_stop called")
-    if st.session_state.running:
-        st.session_state.running=False
+    if st.session_state.bot_.running:
+        st.session_state.bot_.running=False
         st.session_state.bot_.mints=4
         st.session_state.bot_=None
 
