@@ -28,6 +28,7 @@ def on_start(mode, server_input, auth_input):
             pass
     _bot_instance["bot"] = bot(server_input, auth_input)
     _bot_instance["running"] = True
+    _bot_instance["bot"].running=True
     _bot_instance["bot"].scrap.scrap()
     threading.Thread(target=_bot_instance["bot"].command).start()
     push_log(f"[stub] on_start called — mode={mode}")
@@ -192,6 +193,7 @@ message_input = st.text_input(
     placeholder="Custom message to send along with the CSV",
 )
 if  _bot_instance["bot"]:
+    print("working oo")
     _bot_instance["bot"].mess_to_send=message_input
     
 st.write("")
@@ -201,12 +203,14 @@ with m1:
     if st.button("🏆 Top Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "top" else "secondary"):
         if _bot_instance["bot"]:
+            print("instance one")
             _bot_instance["bot"].mints=1
             st.session_state.mode = "top"
 with m2:
     if st.button("🆕 Recent Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
         if _bot_instance["bot"]:
+            print("instance two")
             _bot_instance["bot"].mints=0
     
             st.session_state.mode = "recent"
