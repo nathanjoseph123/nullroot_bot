@@ -10,6 +10,7 @@ class bot:
         self.messages=[]
         self.address={}
         self.path=""
+        self.running=False
         self.prev=0
         self.server_id=server_id
         self.split=0
