@@ -23,65 +23,66 @@ class bot:
 
     def command(self):
         while self.ben:
-            if self.mints==0:
-                self.path= os.path.join(self.scrap.download_dir,"recent-minters.csv")
-                self.scrap.get_recent_minters()
-                self.split=0
-                
-                try:
-                    self.prev=len(self.messages)
-                    with open(self.path,'r') as files:
-                        lines=files.readlines()
-                        self.messages=[lines[i] for i in range(1,len(lines))]
-                        self.address.clear()
-                    if os.path.exists(self.path):
-                        os.remove(self.path)
-                    for i in range(len(self.messages)):
-                        some_shit=self.messages[i].split(',')
-                        new_string=some_shit[self.split].rstrip("'")
-                        self.address.update({i:new_string})
-                    if self.prev <len(self.messages):
-                        self.send_message()
-                        print("message sent 0")            
-
-                except Exception as e:
+            if self.running:
+                if self.mints==0:
+                    self.path= os.path.join(self.scrap.download_dir,"recent-minters.csv")
+                    self.scrap.get_recent_minters()
+                    self.split=0
+                    
                     try:
-                        print("ERROR READING FILE ",e)
+                        self.prev=len(self.messages)
+                        with open(self.path,'r') as files:
+                            lines=files.readlines()
+                            self.messages=[lines[i] for i in range(1,len(lines))]
+                            self.address.clear()
                         if os.path.exists(self.path):
-                          os.remove(self.path)
+                            os.remove(self.path)
+                        for i in range(len(self.messages)):
+                            some_shit=self.messages[i].split(',')
+                            new_string=some_shit[self.split].rstrip("'")
+                            self.address.update({i:new_string})
+                        if self.prev <len(self.messages):
+                            self.send_message()
+                            print("message sent 0")            
+
                     except Exception as e:
-                        pass
-            elif self.mints==1:
-                self.split=1
-                self.scrap.get_top_minters()
-                self.path=os.path.join(self.scrap.download_dir,"top-minters.csv")
-                try:
-                    self.privious=len(self.top_message)
-                    with open(self.path,'r') as files:
-                        lines=files.readlines()
-                        self.top_message=[lines[i] for i in range(1,len(lines))]
-                        self.address.clear()
-                    if os.path.exists(self.path):
-                        os.remove(self.path)
-                    for i in range(len(self.top_message)):
-                        some_shit=self.top_message[i].split(',')
-                        new_string=some_shit[self.split].rstrip("'")
-                        self.address.update({i:new_string})
-                    if self.privious <len(self.top_message):
+                        try:
+                            print("ERROR READING FILE ",e)
+                            if os.path.exists(self.path):
+                              os.remove(self.path)
+                        except Exception as e:
+                            pass
+                elif self.mints==1:
+                    self.split=1
+                    self.scrap.get_top_minters()
+                    self.path=os.path.join(self.scrap.download_dir,"top-minters.csv")
+                    try:
+                        self.privious=len(self.top_message)
+                        with open(self.path,'r') as files:
+                            lines=files.readlines()
+                            self.top_message=[lines[i] for i in range(1,len(lines))]
+                            self.address.clear()
+                        if os.path.exists(self.path):
+                            os.remove(self.path)
+                        for i in range(len(self.top_message)):
+                            some_shit=self.top_message[i].split(',')
+                            new_string=some_shit[self.split].rstrip("'")
+                            self.address.update({i:new_string})
+                        if self.privious <len(self.top_message):
                         self.mess_to_send="latest top miner :"
                         self.send_message()
                         print("SENT BLYAT")
-                except Exception as e:
-                    try:
-                        print("ERROR READING FILE ",e)
-                        if os.path.exists(self.path):
-                          os.remove(self.path)
                     except Exception as e:
-                        pass
-
-            elif self.mints==4:
-                self.scrap.site.quit()
-                exit()                           
+                        try:
+                            print("ERROR READING FILE ",e)
+                            if os.path.exists(self.path):
+                              os.remove(self.path)
+                        except Exception as e:
+                            pass
+    
+                elif self.mints==4:
+                    self.scrap.site.quit()
+                    exit()                           
     
             time.sleep(0.5)
 
