@@ -182,22 +182,23 @@ message_input = st.text_input(
 )
 if  st.session_state.bot_:
     st.session_state.bot_.mess_to_send=message_input
-    print("yeeeeeeee    : ",st.session_state.bot_.mess_to_send)
+    
 st.write("")
 st.subheader("Mode")
 m1, m2 = st.columns(2)
 with m1:
     if st.button("🏆 Top Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "top" else "secondary"):
-        
-        st.session_state.bot_.mints=1
-        st.session_state.mode = "top"
+        if st.session_state.bot_:
+            st.session_state.bot_.mints=1
+            st.session_state.mode = "top"
 with m2:
     if st.button("🆕 Recent Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
-        st.session_state.bot_.mints=0
-
-        st.session_state.mode = "recent"
+        if st.session_state.bot_:
+            st.session_state.bot_.mints=0
+    
+            st.session_state.mode = "recent"
        
 
 st.write("")
