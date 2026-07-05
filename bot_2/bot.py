@@ -24,14 +24,12 @@ class bot:
     def command(self):
         while self.ben:
             if self.mints==0:
-                self.path= self.scrap.download_dir+"recent-minters.csv"
-                self.scrap.download_dir=self.scrap.download_dir+"recent-minters.csv"
+                self.path= os.path.join(elf.scrap.download_dir,"recent-minters.csv")
                 self.scrap.get_recent_minters()
                 self.split=0
-                self.path= self.scrap.download_dir+"recent-minters.csv"
+                
                 try:
                     self.prev=len(self.messages)
-                    os.remove(self.path)
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.messages=[lines[i] for i in range(1,len(lines))]
@@ -55,10 +53,9 @@ class bot:
             elif self.mints==1:
                 self.split=1
                 self.scrap.get_top_minters()
-                self.path=self.scrap.download_dir+"top-minters.csv"
+                self.path=os.path.join(self.scrap.download_dir,"top-minters.csv")
                 try:
                     self.privious=len(self.messages)
-                    os.remove(self.path)
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.top_message=[lines[i] for i in range(1,len(lines))]
