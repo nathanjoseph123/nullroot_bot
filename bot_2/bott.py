@@ -204,7 +204,7 @@ st.subheader("Mode")
 m1, m2 = st.columns(2)
 with m1:
     if st.button("🏆 Top Minters", use_container_width=True,
-                  type="primary" if st.session_state.mode == "NONE" else "secondary"):
+                  type="primary" if st.session_state.mode == "top" else "secondary"):
         if _bot_instance["bot"]:
             print("instance one")
             _bot_instance["bot"].mints=1
@@ -228,7 +228,7 @@ status_class = "status-running" if st.session_state.running else "status-idle"
 status_text = "RUNNING" if st.session_state.running else "IDLE"
 st.markdown(
     f'<span class="status-pill {status_class}">● {status_text}</span> '
-    f'&nbsp; mode: <b>{st.session_state.mode.upper()}</b>',
+    f'&nbsp; mode: <b>"NONE"</b>',
     unsafe_allow_html=True,
 )
 
