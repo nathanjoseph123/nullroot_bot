@@ -26,6 +26,18 @@ class scraper:
         options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
         options.set_preference("browser.download.manager.showWhenStarting", False)
         options.set_preference("security.sandbox.content.level", 0)
+        
+        options.set_preference("app.normandy.enabled", False)
+        options.set_preference("services.settings.server", "")
+        options.set_preference("datareporting.policy.dataSubmissionEnabled", False)
+        options.set_preference("toolkit.telemetry.enabled", False)
+        options.set_preference("browser.newtabpage.activity-stream.feeds.telemetry", False)
+        options.set_preference("network.captive-portal-service.enabled", False)
+
+
+
+
+        
         service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
         subprocess.run(["pkill", "-f", "firefox"], check=False)
         subprocess.run(["pkill", "-f", "geckodriver"], check=False)
