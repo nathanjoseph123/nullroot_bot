@@ -24,7 +24,7 @@ def on_start(mode, server_input, auth_input):
     if st.session_state._bot_instance["bot"] is not None:
         try:
             st.session_state._bot_instance["bot"].scrap.site.quit()
-            st.session_state._bot_instance["bot"].ben=False
+            
         except Exception:
             pass
     st.session_state._bot_instance["bot"] = bot(server_input, auth_input)
