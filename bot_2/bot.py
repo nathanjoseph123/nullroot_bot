@@ -24,6 +24,8 @@ class bot:
     def command(self):
         while self.ben:
             if self.mints==0:
+                self.path= self.scrap.download_dir+"recent-minters.csv"
+                self.scrap.download_dir=self.scrap.download_dir+"recent-minters.csv"
                 self.scrap.get_recent_minters()
                 self.split=0
                 self.path= self.scrap.download_dir+"recent-minters.csv"
