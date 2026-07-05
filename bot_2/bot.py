@@ -85,7 +85,7 @@ class bot:
                     self.scrap.site.quit()
                     exit()                           
     
-            time.sleep(0.5)
+            time.sleep(1.2)
 
 
     def send_message(self):
