@@ -33,7 +33,8 @@ class bot:
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.messages=[lines[i] for i in range(1,len(lines))]
-                    os.remove(self.path)
+                    if os.path.exists(self.path):
+                        os.remove(self.path)
                     for i in range(len(self.messages)):
                         some_shit=self.messages[i].split(',')
                         new_string=some_shit[self.split].rstrip("'")
@@ -60,7 +61,8 @@ class bot:
                         lines=files.readlines()
                         self.top_message=[lines[i] for i in range(1,len(lines))]
                         self.address.clear()
-                    os.remove(self.path)
+                    if os.path.exists(self.path):
+                        os.remove(self.path)
                     for i in range(len(self.top_message)):
                         some_shit=self.top_message[i].split(',')
                         new_string=some_shit[self.split].rstrip("'")
@@ -68,10 +70,13 @@ class bot:
                     if self.privious <len(self.top_message):
                         self.mess_to_send="latest top miner :"
                         self.send_message()
+                        print("SENT BLYAT")
                 except Exception as e:
                     try:
                         print("ERROR READING FILE : ",e)
-                        os.remove(self.path)
+                        if os.path.exists(self.path):
+                            os.remove(self.path)
+                        
                         self.scrap.site.quit()
                         self.ben=False
                     except Exception as e:
