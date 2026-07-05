@@ -206,7 +206,8 @@ with m1:
         st.session_state._bot_instance["bot"].mints=0
         if st.session_state._bot_instance["bot"]:
             st.session_state._bot_instance["bot"].running=True
-            
+            push_log(f"[stub] new — mode={mode}")
+            print("running 1")
             st.session_state._bot_instance["mode"]="top"
         else:
           print("no omom2")
@@ -217,7 +218,8 @@ with m2:
         st.session_state._bot_instance["bot"].mints=0
         if st.session_state._bot_instance["bot"]:
             st.session_state._bot_instance["bot"].running=True
-
+            print("running 2")
+            push_log(f"[stub] new — mode={mode}")
             st.session_state._bot_instance["mode"]="recent"
         else:
             print("no omom3")
