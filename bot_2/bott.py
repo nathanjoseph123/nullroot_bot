@@ -207,7 +207,7 @@ with m1:
                   type="primary" if st.session_state.mode == "top" else "secondary"):
         st.session_state.mode = "top"
         if st.session_state._bot_instance["bot"]:
-            st.session_state._bot_instance["bot"].mints = 0
+            st.session_state._bot_instance["bot"].mints = 1
             st.session_state._bot_instance["bot"].running = True
             st.session_state._bot_instance["mode"] = "top"
             push_log(f"[stub] new — mode={st.session_state.mode}")
