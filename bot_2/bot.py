@@ -29,7 +29,7 @@ class bot:
                 self.path= self.scrap.download_dir+"recent-minters.csv"
                 try:
                     self.prev=len(self.messages)
-                    print(os.listdir(self.path)
+                    print(os.listdir(self.path))
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.messages=[lines[i] for i in range(1,len(lines))]
