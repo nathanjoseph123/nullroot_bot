@@ -83,7 +83,7 @@ class bot:
                 elif self.mints==4:
                     self.scrap.site.quit()
                     self.ben=False
-            print("self.mint  : ",self.mint)
+            print("self.mint  : ",self.mints)
             time.sleep(1.0)
 
     def send_message(self):
