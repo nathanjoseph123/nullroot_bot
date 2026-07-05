@@ -18,8 +18,8 @@ if "bot_" not in st.session_state:
     st.session_state.bot_ = None
 def on_start(mode: str, server_input: str, auth_input: str):
     if  not st.session_state.bot_:
-        st.session_state.bot_.running=True
         st.session_state.bot_= bot(server_input,auth_input)
+        st.session_state.bot_.running=True
         st.session_state.bot_.scrap.scrap()
         threading.Thread(target=st.session_state.bot_.command).start()
         push_log(f"[stub] on_start called — mode={mode}")
