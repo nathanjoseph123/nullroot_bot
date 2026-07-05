@@ -19,7 +19,6 @@ class scraper:
         options = Options()
         self.download_dir = "/app/downloads/"
         options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.binary_location = "/usr/bin/firefox-esr"
         options.set_preference("browser.download.folderList", 2)
