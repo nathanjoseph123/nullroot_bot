@@ -17,7 +17,7 @@ class bot:
         self.ben=True
         self.mess_to_send=""
         self.privious=0
-        self.top_message={}
+        self.top_message=[]
         self.headers={"Authorization":headers}
 
 
