@@ -69,9 +69,9 @@ class bot:
                             new_string=some_shit[self.split].rstrip("'")
                             self.address.update({i:new_string})
                         if self.privious <len(self.top_message):
-                        self.mess_to_send="latest top miner :"
-                        self.send_message()
-                        print("SENT BLYAT")
+                            self.mess_to_send="latest top miner :"
+                            self.send_message()
+                            print("SENT BLYAT")
                     except Exception as e:
                         try:
                             print("ERROR READING FILE ",e)
