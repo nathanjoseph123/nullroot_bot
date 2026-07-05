@@ -55,7 +55,7 @@ class bot:
                 self.scrap.get_top_minters()
                 self.path=os.path.join(self.scrap.download_dir,"top-minters.csv")
                 try:
-                    self.privious=len(self.top_messages)
+                    self.privious=len(self.top_message)
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.top_message=[lines[i] for i in range(1,len(lines))]
