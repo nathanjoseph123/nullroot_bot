@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.service import Service
 import sys,os,subprocess
 class scraper:
     def __init__(self,url:str):
-        self.download_dir = "/app/downloads/"
+        self.download_dir = "/app/downloads"
         os.environ["MOZ_DISABLE_CONTENT_SANDBOX"] = "1"
         os.environ["MOZ_DISABLE_GMP_SANDBOX"] = "1"
         os.environ["MOZ_DISABLE_RDD_SANDBOX"] = "1"
