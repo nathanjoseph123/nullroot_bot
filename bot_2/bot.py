@@ -33,6 +33,7 @@ class bot:
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.messages=[lines[i] for i in range(1,len(lines))]
+                        self.address.clear()
                     if os.path.exists(self.path):
                         os.remove(self.path)
                     for i in range(len(self.messages)):
