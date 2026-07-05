@@ -14,34 +14,35 @@ saved_server = localS.getItem("server_input") or ""
 saved_auth = localS.getItem("auth_input") or ""
 saved_message = localS.getItem("message_input") or ""
 # near the top of the file, outside any function
-_bot_instance = {"bot": None, "running": False,"mode":"None"}
+if "_bot_instance" not in st.session_state:
+    st.session_state._bot_instance = {"bot": None, "running": False,"mode":"None"}
 
 def on_start(mode, server_input, auth_input):
-    if _bot_instance["running"]:
+    if st.session_state._bot_instance["running"]:
         push_log("Already running — ignoring duplicate start.")
         return
-    if _bot_instance["bot"] is not None:
+    if st.session_state._bot_instance["bot"] is not None:
         try:
-            _bot_instance["bot"].scrap.site.quit()
+            st.session_state._bot_instance["bot"].scrap.site.quit()
         except Exception:
             pass
-    _bot_instance["bot"] = bot(server_input, auth_input)
-    _bot_instance["running"] = True
-    _bot_instance["bot"].running=True
-    _bot_instance["bot"].scrap.scrap()
-    print("bot id : ",_bot_instance["bot"])
+    st.session_state._bot_instance["bot"] = bot(server_input, auth_input)
+    st.session_state._bot_instance["running"] = True
+    st.session_state._bot_instance["bot"].running=True
+    st.session_state._bot_instance["bot"].scrap.scrap()
+    print("bot id : ",st.session_state._bot_instance["bot"])
     threading.Thread(target=_bot_instance["bot"].command).start()
     push_log(f"[stub] on_start called — mode={mode}")
 
 def on_stop():
-    if _bot_instance["bot"] is not None:
+    if st.session_state._bot_instance["bot"] is not None:
         try:
-            _bot_instance["bot"].running=False
-            _bot_instance["bot"].scrap.site.quit()
+            st.session_state._bot_instance["bot"].running=False
+            st.session_state._bot_instance["bot"].scrap.site.quit()
         except Exception:
             pass
-    _bot_instance["bot"] = None
-    _bot_instance["running"] = False
+    st.session_state._bot_instance["bot"] = None
+    st.session_state._bot_instance["running"] = False
     push_log("Stopped.")
 
 def push_log(msg: str):
@@ -192,8 +193,8 @@ message_input = st.text_input(
     value=saved_message,
     placeholder="Custom message to send along with the CSV",
 )
-if  _bot_instance["bot"]:
-    _bot_instance["bot"].mess_to_send=message_input
+if  st.session_state._bot_instance["bot"]:
+    st.session_state._bot_instance["bot"].mess_to_send=message_input
 else:
     print("no omom1")
 st.write("")
@@ -203,20 +204,20 @@ with m1:
     if st.button("🏆 Top Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "top" else "secondary"):
         st.session_state.mode = "top"
-        if _bot_instance["bot"]:
+        if st.session_state._bot_instance["bot"]:
             print("instance one")
-            _bot_instance["bot"].mints=1
-            _bot_instance["mode"]="top"
+            st.session_state._bot_instance["bot"].mints=1
+            st.session_state._bot_instance["mode"]="top"
         else:
           print("no omom2")
 with m2:
     if st.button("🆕 Recent Minters", use_container_width=True,
                   type="primary" if st.session_state.mode == "recent" else "secondary"):
         st.session_state.mode = "recent"
-        if _bot_instance["bot"]:
+        if st.session_state._bot_instance["bot"]:
             print("instance two")
-            _bot_instance["bot"].mints=0
-            _bot_instance["mode"]="recent"
+            st.session_state._bot_instance["bot"].mints=0
+            st.session_state._bot_instance["mode"]="recent"
         else:
             print("no omom3")
        
@@ -226,7 +227,7 @@ status_class = "status-running" if st.session_state.running else "status-idle"
 status_text = "RUNNING" if st.session_state.running else "IDLE"
 st.markdown(
     f'<span class="status-pill {status_class}">● {status_text}</span> '
-    f'&nbsp; mode: <b>_bot_instance["mode"]</b>',
+    f'&nbsp; mode: <b>{st.session_state._bot_instance["mode"]}</b>',
     unsafe_allow_html=True,
 )
 
