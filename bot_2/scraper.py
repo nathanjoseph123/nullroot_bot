@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.service import Service
-import sys,os
+import sys,os,subprocess
 class scraper:
     def __init__(self,url:str):
 
@@ -28,6 +28,9 @@ class scraper:
         options.set_preference("browser.download.manager.showWhenStarting", False)
         options.set_preference("security.sandbox.content.level", 0)
         service = Service(log_output=sys.stdout)  # <-- prints geckodriver's real logs to Render's log stream
+        subprocess.run(["pkill", "-f", "firefox"], check=False)
+        subprocess.run(["pkill", "-f", "geckodriver"], check=False)
+        service = Service(log_output=sys.stdout, service_args=["--marionette-port", "0"])
         self.site = webdriver.Firefox(options=options, service=service)
         self.url=url
         self.sucessful=False
