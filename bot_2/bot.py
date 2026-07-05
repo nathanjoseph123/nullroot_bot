@@ -29,7 +29,7 @@ class bot:
                 self.path= self.scrap.download_dir+"recent-minters.csv"
                 try:
                     self.prev=len(self.messages)
-                    print(os.listdir(self.path))
+                    os.remove(self.path)
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.messages=[lines[i] for i in range(1,len(lines))]
@@ -56,6 +56,7 @@ class bot:
                 self.path=self.scrap.download_dir+"top-minters.csv"
                 try:
                     self.privious=len(self.messages)
+                    os.remove(self.path)
                     with open(self.path,'r') as files:
                         lines=files.readlines()
                         self.top_message=[lines[i] for i in range(1,len(lines))]
